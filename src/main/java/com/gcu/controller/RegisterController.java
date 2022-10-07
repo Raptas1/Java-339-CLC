@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.gcu.model.UserModel;
 
@@ -27,14 +26,22 @@ public class RegisterController {
 	}
 	
 	
-	@PostMapping("/registered")
-	public RedirectView registered(@Valid UserModel userModel, BindingResult bindingResult, Model model) {
+	@PostMapping("")
+	public String registered(@Valid UserModel userModel, BindingResult bindingResult, Model model) {
+		
+		if(bindingResult.hasErrors()) {
+			return ("/register");
+		}
+		
+		
+		System.out.println("Username: " + userModel.credentials.getUsername() + " Password: " + userModel.credentials.getPassword());
 		this.userModel.setFirstName(userModel.getFirstName());
 		this.userModel.setLastName(userModel.getLastName());
-		this.userModel.setUsername(userModel.getUsername());
-		this.userModel.setPassword(userModel.getPassword());
+		this.userModel.credentials.setUsername(userModel.credentials.getUsername());
+		this.userModel.credentials.setPassword(userModel.credentials.getPassword());
 		this.userModel.setEmail(userModel.getEmail());
-		return new RedirectView("/dashboard");
+		return ("redirect:/dashboard");
 	}
+	
 }
 

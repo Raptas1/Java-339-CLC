@@ -18,7 +18,7 @@ public class DashboardController {
 
 	@GetMapping("")
 	public String displayDashboard(Model model) {
-		model.addAttribute("username", userModel.getUsername());
+		model.addAttribute("username", userModel.credentials.getUsername());
 		model.addAttribute("totalSales", userModel.getTotalNumSales());
 		model.addAttribute("totalListings", userModel.getTotalNumListings());
 		model.addAttribute("totalRevenue", userModel.getTotalRevenue());
