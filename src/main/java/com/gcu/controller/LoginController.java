@@ -24,7 +24,7 @@ public class LoginController {
 	@PostMapping("")
 	public String doLogin(@Valid UserModel userModel, BindingResult bindingResult, Model model) {
 		
-		if(bindingResult.hasFieldErrors("credentials.username") && bindingResult.hasFieldErrors("credentials.password")) {
+		if(bindingResult.hasFieldErrors("credentials.username") || bindingResult.hasFieldErrors("credentials.password")) {
 			return "/login";
 		}
 		
