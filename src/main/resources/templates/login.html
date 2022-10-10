@@ -17,12 +17,14 @@
 			<div class="form-outline  mb-5 col-lg-4 col-center">
 					<label for="username" class="form-label">Username</label>
 					<input type="text" class="form-control" th:field="*{credentials.username}" id="username">
+					<div class="text-danger" th:if="${#fields.hasErrors('credentials.username')}" th:errors="*{credentials.username}">Error</div>
 			</div>
 			
 			<div class="form-outline mb-5 col-lg-4 col-center">
 				<label for="password" class="form-label">Password</label>
 				<input type="password" class="form-control" th:field="*{credentials.password}" id="password">
-				</div>
+				<div class="text-danger" th:if="${#fields.hasErrors('credentials.password')}" th:errors="*{credentials.password}">Invalid</div>
+			</div>
 		
 			  <input type="submit" class="btn btn-primary btn-block mb-4" value="Sign In"></input>
 			  

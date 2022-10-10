@@ -1,5 +1,7 @@
 package com.gcu.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,12 +22,11 @@ public class LoginController {
 	}
 	
 	@PostMapping("")
-	public String doLogin(UserModel userModel, BindingResult bindingResult, Model model) {
+	public String doLogin(@Valid UserModel userModel, BindingResult bindingResult, Model model) {
 		
-		if(bindingResult.hasErrors()) {
+		if(bindingResult.hasFieldErrors("credentials.username") && bindingResult.hasFieldErrors("credentials.password")) {
 			return "/login";
 		}
-		System.out.println("Hello");
 		
 		return ("redirect:/dashboard");
 	}
