@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gcu.business.SecurityService;
 import com.gcu.model.UserModel;
 
 @Controller
@@ -18,6 +19,9 @@ public class RegisterController {
 	
 	@Autowired
 	UserModel userModel = new UserModel();
+	
+	@Autowired
+	SecurityService securityService;
 
 	@GetMapping("")
 	public String displayRegister(Model model) {
@@ -33,6 +37,9 @@ public class RegisterController {
 			return ("/register");
 		}
 		
+		if(!securityService.verify(userModel, bindingResult)) {
+			return ("/register");
+		}
 		
 		System.out.println("Username: " + userModel.credentials.getUsername() + " Password: " + userModel.credentials.getPassword());
 		this.userModel.setFirstName(userModel.getFirstName());
