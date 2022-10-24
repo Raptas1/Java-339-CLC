@@ -9,6 +9,8 @@
 <!--ChartsJs -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<!--CSS-->
+<link rel="stylesheet" href="myListings.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 </head>
 
@@ -26,6 +28,7 @@
                 <a th:href="@{../dashboard}" class="nav-item nav-link">Dashboard</a>
                 <a href="#" class="nav-item nav-link active">My Listings</a>
                 <a th:href="@{../dashboard/listings}" class="nav-item nav-link">Listings</a>
+                <a th:href="@{../dashboard/create}" class="nav-item nav-link">Create New</a>
             </div>
             <div class="navbar-nav ms-auto">
             	<i class="nav-item nav-link bi bi-bell-fill">
@@ -50,5 +53,30 @@
 	</nav>
 	
 	<h1 class="mt-4 text-center">My Listings</h1>
+
+  <br>
+  <table style="width:50%">
+    <thead>
+        <tr>
+            <th style="text-align:center">Name</th>
+            <th style="text-align:center">Description</th>
+            <th style="text-align:center">Category</th>
+            <th style="text-align:center">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:each="listing : ${listings}">
+      <td style="text-align:center"><h5 th:text="${listing.name}">0000000001</h5></td>
+      <td style="text-align:center"><h5 th:text="${listing.description}">Product 1</h5></td>
+      <td style="text-align:center"><h5 th:text="${listing.category}">1.00</h5></td>
+      <td style="text-align:center"><h5 th:text="${listing.price}">1</h5></td>
+  </tr>
+    </tbody>
+    </table>
+	<br>
+
+  <a th:href="@{create}">Create a New Listing</a>
+
+	<script src="myListings.js"></script>
 </body>
 </html>
