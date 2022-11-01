@@ -10,6 +10,12 @@ public class UsersEntity {
 	@Id
 	Long id;
 	
+	@Column("USERNAME")
+	String username;
+	
+	@Column("PASSWORD")
+	String password;
+	
 	@Column("FIRST_NAME")
 	String firstName;
 	
@@ -34,10 +40,23 @@ public class UsersEntity {
 	@Column("PHONE_NUMBER")
 	String phoneNumber;
 	
-	public UsersEntity(Long id, String firstName, String lastName, String email, String address, String city,
-			String state, String zipCode, String phoneNumber) {
+	@Column("TOTAL_NUM_LISTINGS")
+	int totalNumListings;
+	
+	@Column("TOTAL_NUM_SALES")
+	int totalNumSales;
+	
+	@Column("TOTAL_REVENUE")
+	int totalRevenue;
+	
+	
+	public UsersEntity(Long id, String username, String password, String firstName, String lastName, String email, String address, String city,
+			String state, String zipCode, String phoneNumber, int totalNumListings, int totalNumSales,
+			int totalRevenue) {
 		super();
 		this.id = id;
+		this.username = username;
+		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -46,6 +65,9 @@ public class UsersEntity {
 		this.state = state;
 		this.zipCode = zipCode;
 		this.phoneNumber = phoneNumber;
+		this.totalNumListings = totalNumListings;
+		this.totalNumSales = totalNumSales;
+		this.totalRevenue = totalRevenue;
 	}
 
 	public Long getId() {
@@ -54,6 +76,24 @@ public class UsersEntity {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getFirstName() {
@@ -118,6 +158,30 @@ public class UsersEntity {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public int getTotalNumListings() {
+		return totalNumListings;
+	}
+
+	public void setTotalNumListings(int totalNumListings) {
+		this.totalNumListings = totalNumListings;
+	}
+
+	public int getTotalNumSales() {
+		return totalNumSales;
+	}
+
+	public void setTotalNumSales(int totalNumSales) {
+		this.totalNumSales = totalNumSales;
+	}
+
+	public int getTotalRevenue() {
+		return totalRevenue;
+	}
+
+	public void setTotalRevenue(int totalRevenue) {
+		this.totalRevenue = totalRevenue;
 	}
 	
 	
