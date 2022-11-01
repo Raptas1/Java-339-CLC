@@ -7,6 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -19,6 +20,9 @@ public class UserModel {
 	private ArrayList<ListingModel> allListings = new ArrayList<ListingModel>();
 	
 	//User Sensitive Information
+	@Id
+	private Long id;
+	
 	@NotEmpty(message="This field is required")
 	private String firstName;
 	
@@ -45,9 +49,9 @@ public class UserModel {
 	private String phoneNumber;
 	
 	
-	private int totalNumListings;
-	private int totalNumSales;
-	private int totalRevenue;
+	private int totalNumListings = 0;
+	private int totalNumSales = 0;
+	private int totalRevenue = 0;
 	
 	public UserModel() {
 		credentials = new CredentialModel();
@@ -59,9 +63,6 @@ public class UserModel {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		
-		this.totalNumListings = 0;
-		this.totalNumSales = 0;
 	}
 	
 	
@@ -73,6 +74,15 @@ public class UserModel {
 	public void setListing(ListingModel listing) {
 		this.listing = listing;
 	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
