@@ -25,10 +25,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav">
-				<a th:href="@{../dashboard}" class="nav-item nav-link">Dashboard</a>
+                <a th:href="@{../dashboard}" class="nav-item nav-link">Dashboard</a>
                 <a th:href="@{../dashboard/myListings}" class="nav-item nav-link">My Listings</a>
                 <a th:href="@{../dashboard/listings}" class="nav-item nav-link">Listings</a>
-                <a href="" class="nav-item nav-link active">Create</a>
+                <a th:href="@{../dashboard/create}" class="nav-item nav-link">Create</a>
             </div>
             <div class="navbar-nav ms-auto">
             	<i class="nav-item nav-link bi bi-bell-fill">
@@ -52,33 +52,8 @@
     </div>
 	</nav>
 	
-	<h1 class="mt-4 text-center">Create a New Listing</h1>
+	<h1 class="mt-4 text-center">Create Success!</h1>
 
-	<form action="#" th:action="@{createSuccess}" th:object="${listingModel}" method="post">
-        
-            <table>
-              <tr>
-                <td>Name:</td><td><input type="text" th:field="*{name}"></td><td><h5 style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</h5></td>
-              </tr>              
-              <tr>
-                <td>Description:</td><td><input type="text" th:field="*{description}"></td><td><h5 style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</h5></td>
-              </tr>       
-              <tr>
-                <td>Category:</td><td><input type="text" th:field="*{category}"></td><td><h5 style="color:red" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category Error</h5></td>
-              </tr>    
-              <tr>
-                <td>Price:</td><td><input type="text" th:field="*{price}"></td><td><h5 style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</h5></td>
-              </tr>    
-            </table>
-            
-              <td colspan="3"><input type="submit" value="Create"  /></td>
-              
-            <div th:if="${#fields.hasErrors('*')}">List of Errors</div>
-            <div th:each="err : ${#fields.errors('*')}">
-             <span style="color:red" th:text="${err}" class="fieldError"></span>
-         </div>
 
-      <a th:href="@{myListings}">View My Listings</a>
-      
 </body>
 </html>
