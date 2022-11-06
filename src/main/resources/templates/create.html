@@ -69,9 +69,6 @@
               <tr>
                 <td>Price:</td><td><input type="text" th:field="*{price}"></td><td><h5 style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</h5></td>
               </tr>    
-              <tr>
-                <td>Number(s) of copy:</td><td><input type="number" th:field="*{copy}"></td><td><h5 style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{copy}">Price Error</h5></td>
-              </tr>    
             </table>
             
               <td colspan="3"><input type="submit" value="Create"  /></td>
@@ -83,6 +80,5 @@
 
       <a th:href="@{myListings}">View My Listings</a>
       
-	<script src="myListings.js"></script>
 </body>
 </html>

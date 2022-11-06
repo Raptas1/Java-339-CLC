@@ -65,6 +65,9 @@
         </tr>
     </thead>
     <tbody>
+    <tr th:if="${listings.empty}">
+        <td style="text-align:center" colspan="4">No Orders Available</td>
+    </tr>
     <tr th:each="listing : ${listings}">
       <td style="text-align:center"><h5 th:text="${listing.name}">0000000001</h5></td>
       <td style="text-align:center"><h5 th:text="${listing.description}">Product 1</h5></td>
@@ -77,6 +80,5 @@
 
   <a th:href="@{create}">Create a New Listing</a>
 
-	<script src="myListings.js"></script>
 </body>
 </html>
