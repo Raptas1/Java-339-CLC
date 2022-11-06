@@ -9,6 +9,8 @@ import javax.validation.constraints.Size;
 
 public class ListingModel {
 	
+    private Long id;
+    
 	@NotNull(message="Name is a required field")
     @Size(min=1, max=25, message="Name has to be in range of 1 to 25 characters")
 	private String name;
@@ -21,13 +23,11 @@ public class ListingModel {
 	private int category;
 
 	@Min(value=1, message="0 is not a suitable number")
-	private int price;
-
-	@Min(value = 0, message="Cannot accept a negative copy")
-	private int copy;
+	private float price;
 	
-	public ListingModel(String name, String description, int category, int price)
+	public ListingModel(Long id, String name, String description, int category, float price)
 	{
+	    this.id = id;
 		this.name = name;
 		this.description = description;
 		this.category = category;
@@ -37,6 +37,12 @@ public class ListingModel {
 	{
 
 	}
+	public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
 	public String getName() {
 		return name;
 	}
@@ -55,29 +61,11 @@ public class ListingModel {
 	public void setCategory(int category) {
 		this.category = category;
 	}
-	public int getPrice() {
+	public float getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
-	public int getCopy()
-	{
-		return copy;
-	}
-	public void setCopy(int copy)
-	{
-		this.copy = copy;
-	}
-	public List<ListingModel> generateListings(ListingModel listingModel)
-	{
-		List<ListingModel> listings = new ArrayList<ListingModel>();
-		for (int i = 0; i < listingModel.copy; i++)
-		{
-			listings.add(new ListingModel(listingModel.name, listingModel.description, listingModel.category, listingModel.price));
-		}	
-		return listings;
-	}
-	
 
 }
