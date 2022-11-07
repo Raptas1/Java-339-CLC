@@ -1,32 +1,36 @@
 package com.gcu.business;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 
+import com.gcu.data.UsersDataService;
+import com.gcu.data.entity.UsersEntity;
 import com.gcu.model.UserModel;
 
 @Service
-public class SecurityService {
+public class SecurityService implements SecurityServiceInterface {
 	
-	//LoginController
-	public boolean authenticate(String username, String password) {
+	@Autowired
+	UsersDataService usersDataService;
 
-		if(username.equals("admin") && password.equals("password")) {
-			return true;
+	@Override
+	/**
+	 * This method checks if the username equals to the password of that username.
+	 */
+	public int authenticateUser(UserModel userModel) {
+		UsersEntity usersEntity;
+		if(usersDataService.findByUsername(userModel.credentials.getUsername()) == null) {
+			return 1;
+		} else {
+			usersEntity = usersDataService.findByUsername(userModel.credentials.getUsername());
+			if(userModel.credentials.getPassword().equals(usersEntity.getPassword())) {
+				return 0;
+			} else {
+				return 1;
+			}
 		}
-		return false;
 	}
 	
-	public boolean verify(UserModel userModel, BindingResult bindingResult) {
-		if(userModel.credentials.getUsername().equals("admin")) {
-			bindingResult.rejectValue("credentials.username", "error.username", "Username already exists");
-		}
-		
-		if(userModel.getEmail().equals("igudino2002@gmail.com")) {
-			bindingResult.rejectValue("email", "error.email", "Email already exists");
-		}
-		
-		return true;
-	}
+
 
 }

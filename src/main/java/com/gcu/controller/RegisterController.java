@@ -28,6 +28,11 @@ public class RegisterController {
 	SecurityService securityService;
 
 	@GetMapping("")
+	/**
+	 * This method shows the register view
+	 * @param model
+	 * @return
+	 */
 	public String displayRegister(Model model) {
 		model.addAttribute("userModel", userModel);
 		return "register";
@@ -35,13 +40,26 @@ public class RegisterController {
 	
 	
 	@PostMapping("")
+	/**
+	 * This method is called when register form is sent
+	 * @param userModel
+	 * @param bindingResult
+	 * @param model
+	 * @return
+	 */
 	public String registered(@Valid UserModel userModel, BindingResult bindingResult, Model model) {
 		
-		if(bindingResult.hasErrors()) {
-			return ("/register");
+		if(usersBusinessService.verifyUsername(userModel) == 1) {
+			bindingResult.rejectValue("credentials.username", "error.username", "Username already exists");
+		
 		}
 		
-		if(!usersBusinessService.verifyUser(userModel, bindingResult)) {
+		if(usersBusinessService.verifyEmail(userModel) == 1) {
+			bindingResult.rejectValue("email", "error.email", "Email already exists");
+		}
+		
+		
+		if(bindingResult.hasErrors()) {
 			return ("/register");
 		}
 		
@@ -59,3 +77,4 @@ public class RegisterController {
 	}
 	
 }
+

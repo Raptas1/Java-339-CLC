@@ -16,28 +16,40 @@ import com.gcu.model.UserModel;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-    
-    @Autowired
-    SecurityService securityService;
+	
+	@Autowired
+	SecurityService securityService;
 
-    @GetMapping("")
-    public String displayLogin(Model model) {
-        model.addAttribute("userModel", new UserModel());
-        return "login";
-    }
-    
-    @PostMapping("")
-    public String doLogin(@Valid UserModel userModel, BindingResult bindingResult, Model model) {
-        
-        if(bindingResult.hasFieldErrors("credentials.username") || bindingResult.hasFieldErrors("credentials.password")) {
-            return "/login";
-        }
-        
-        if(securityService.authenticate(userModel.credentials.getUsername(), userModel.credentials.getPassword())) {
-            return ("redirect:/dashboard");
-        }
-        
-        bindingResult.rejectValue("credentials.username", "error.user", "Incorrect username or password");
-        return ("/login");
-    }
+	@GetMapping("")
+	/**
+	 * This method displays the login page
+	 * @param model
+	 * @return
+	 */
+	public String displayLogin(Model model) {
+		model.addAttribute("userModel", new UserModel());
+		return "login";
+	}
+	
+	@PostMapping("")
+	/**
+	 * This method is ran when login form is sent
+	 * @param userModel
+	 * @param bindingResult
+	 * @param model
+	 * @return
+	 */
+	public String doLogin(@Valid UserModel userModel, BindingResult bindingResult, Model model) {
+		
+		if(bindingResult.hasFieldErrors("credentials.username") || bindingResult.hasFieldErrors("credentials.password")) {
+			return "/login";
+		}
+		
+		if(securityService.authenticateUser(userModel) == 0) {
+			return ("redirect:/dashboard");
+		}
+		
+		bindingResult.rejectValue("credentials.username", "error.user", "Incorrect username or password");
+		return ("/login");
+	}
 }
