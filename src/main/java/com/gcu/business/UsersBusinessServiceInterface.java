@@ -1,12 +1,15 @@
 package com.gcu.business;
 
+import java.util.List;
+
+import org.springframework.validation.BindingResult;
+
 import com.gcu.model.UserModel;
 
 
 public interface UsersBusinessServiceInterface {
 	
-	public int createUser(UserModel userModel);
-	public int verifyUsername(UserModel userModel);
-	public int verifyEmail(UserModel userModel);
+	public List<UserModel> createUser(UserModel userModel);
+	public boolean verifyUser(UserModel userModel, BindingResult bindingResult);
 
 }
