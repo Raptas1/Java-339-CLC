@@ -1,10 +1,7 @@
 package com.gcu.business;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 
 import com.gcu.data.UsersDataService;
 import com.gcu.data.entity.UsersEntity;
@@ -17,7 +14,11 @@ public class UsersBusinessService implements UsersBusinessServiceInterface {
 	UsersDataService usersDataService;
 	
 	@Override
-	public List<UserModel> createUser(UserModel userModel) {
+	/**
+	 * This method creates a user Entity from a user model to add to the database
+	 */
+	public int createUser(UserModel userModel) {
+		
 		UsersEntity usersEntity = new UsersEntity(userModel.getId(),
 									userModel.credentials.getUsername(),
 									userModel.credentials.getPassword(),
@@ -33,16 +34,30 @@ public class UsersBusinessService implements UsersBusinessServiceInterface {
 									userModel.getTotalNumSales(),
 									userModel.getTotalRevenue());
 		usersDataService.create(usersEntity);
-		return null;
+		return 0;
 	}
 
 	@Override
-	public boolean verifyUser(UserModel userModel, BindingResult bindingResult) {
+	/**
+	 * This method verifies the username to see if it exists
+	 */
+	public int verifyUsername(UserModel userModel) {
 		if(usersDataService.findByUsername(userModel.credentials.getUsername()) == null) {
-			return true;
+			return 0;
 		}
-		bindingResult.rejectValue("credentials.username", "error.username", "Username already exists");
-		return false;
+		return 1;
 	}
+	
+	@Override
+	/**
+	 * This method verifies the email to see if it exists
+	 */
+	public int verifyEmail(UserModel userModel) {
+		if(usersDataService.findByEmail(userModel.getEmail()) == null) {
+			return 0;
+		}
+		return 1;
+	}
+	
 
 }

@@ -21,19 +21,31 @@ public class LoginController {
 	SecurityService securityService;
 
 	@GetMapping("")
+	/**
+	 * This method displays the login page
+	 * @param model
+	 * @return
+	 */
 	public String displayLogin(Model model) {
 		model.addAttribute("userModel", new UserModel());
 		return "login";
 	}
 	
 	@PostMapping("")
+	/**
+	 * This method is ran when login form is sent
+	 * @param userModel
+	 * @param bindingResult
+	 * @param model
+	 * @return
+	 */
 	public String doLogin(@Valid UserModel userModel, BindingResult bindingResult, Model model) {
 		
 		if(bindingResult.hasFieldErrors("credentials.username") || bindingResult.hasFieldErrors("credentials.password")) {
 			return "/login";
 		}
 		
-		if(securityService.authenticate(userModel.credentials.getUsername(), userModel.credentials.getPassword())) {
+		if(securityService.authenticateUser(userModel) == 0) {
 			return ("redirect:/dashboard");
 		}
 		
