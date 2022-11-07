@@ -10,7 +10,7 @@ import com.gcu.data.repository.UsersRepository;
 
 @Service
 public class UsersDataService implements DataAccessInterface<UsersEntity> {
-	
+
 	@Autowired
 	private UsersRepository usersRepository;
 	
@@ -19,15 +19,11 @@ public class UsersDataService implements DataAccessInterface<UsersEntity> {
 	}
 
 	@Override
-	//unimplemented method
 	public List<UsersEntity> findAll() {
 		return null;
 	}
 
 	@Override
-	/**
-	 * This method creates a user to the database
-	 */
 	public boolean create(UsersEntity user) {
 		try {
 			this.usersRepository.save(user);
@@ -52,21 +48,15 @@ public class UsersDataService implements DataAccessInterface<UsersEntity> {
 	}
 
 	@Override
-	/**
-	 * This method finds a username in the database
-	 */
 	public UsersEntity findByUsername(String username) {
 		UsersEntity usersEntity = usersRepository.findByUsername(username);
 		return usersEntity;
 	}
 
 	@Override
-	/**
-	 * This method find a email in the database
-	 */
 	public UsersEntity findByEmail(String email) {
-		UsersEntity usersEntity = usersRepository.findByEmail(email);
-		return usersEntity;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
