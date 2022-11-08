@@ -69,124 +69,207 @@ public class UsersEntity {
 		this.totalNumSales = totalNumSales;
 		this.totalRevenue = totalRevenue;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 	
-	
-
+	/**
+	 * getter for username
+	 * @return username
+	 */
 	public String getUsername() {
 		return username;
 	}
-
+	
+	/**
+	 * getter for password
+	 * @return password
+	 */
+	public String getPassword() {
+		return password;
+	}
+	
+	/**
+	 * setter for password
+	 * @param password password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	/**
+	 * setter for username
+	 * @param username username
+	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
+	/**
+	 * getter for id
+	 * @return id
+	 */
+	public Long getId() {
+		return id;
 	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	
+	/**
+	 * Setter for Id
+	 * @param id id
+	 */
+	public void setId(Long id) {
+		this.id = id;
 	}
-
+	/**
+	 * Getter for first name
+	 * @return first name
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
-
+	/**
+	 * Setter for first name
+	 * @param firstName first Name
+	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
+	/**
+	 * getter for last name
+	 * @return last name
+	 */
 	public String getLastName() {
 		return lastName;
 	}
-
+	/**
+	 * Setter for last name
+	 * @param lastName last name
+	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
+	/**
+	 * Getter for email
+	 * @return email
+	 */
 	public String getEmail() {
 		return email;
 	}
-
+	/**
+	 * Setter for email
+	 * @param email email
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	/**
+	 * Getter for address
+	 * @return address
+	 */
 	public String getAddress() {
 		return address;
 	}
-
+	/**
+	 * Setter for address
+	 * @param address address
+	 */
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
+	/**
+	 * getter for city
+	 * @return city
+	 */
 	public String getCity() {
 		return city;
 	}
-
+	/**
+	 * Setter for city
+	 * @param city city
+	 */
 	public void setCity(String city) {
 		this.city = city;
 	}
-
+	/**
+	 * getter for state
+	 * @return state
+	 */
 	public String getState() {
 		return state;
 	}
-
+	/**
+	 * setter for state
+	 * @param state state
+	 */
 	public void setState(String state) {
 		this.state = state;
 	}
-
-	public String getZipCode() {
+	/**
+	 * getter for zipcode
+	 * @return zipcode
+	 */
+	public String getZipcode() {
 		return zipCode;
 	}
-
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
+	/**
+	 * setter for zipcode
+	 * @param zipcode zipcode
+	 */
+	public void setZipcode(String zipcode) {
+		this.zipCode = zipcode;
 	}
-
+	/**
+	 * getter for phone number
+	 * @return phone number
+	 */
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-
+	/**
+	 * setter for phone number
+	 * @param phoneNumber phone number
+	 */
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
+	/**
+	 * get total number of listing
+	 * @return total number of listings
+	 */
 	public int getTotalNumListings() {
 		return totalNumListings;
 	}
-
+	/**
+	 * setter for total number of listings
+	 * @param totalNumListings total number of listings
+	 */
 	public void setTotalNumListings(int totalNumListings) {
 		this.totalNumListings = totalNumListings;
 	}
-
+	/**
+	 * getter for total number of sales
+	 * @return total number of sales
+	 */
 	public int getTotalNumSales() {
 		return totalNumSales;
 	}
-
+	/**
+	 * setter for total number of sales
+	 * @param totalNumSales total number of sales
+	 */
 	public void setTotalNumSales(int totalNumSales) {
 		this.totalNumSales = totalNumSales;
 	}
-
+	/**
+	 * getter for total revenue
+	 * @return total revenue
+	 */
 	public int getTotalRevenue() {
 		return totalRevenue;
 	}
-
+	/**
+	 * setter for total revenue
+	 * @param totalRevenue total revenue
+	 */
 	public void setTotalRevenue(int totalRevenue) {
 		this.totalRevenue = totalRevenue;
 	}
-	
-	
-	
-	
 	
 
 }

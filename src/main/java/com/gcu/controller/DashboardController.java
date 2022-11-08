@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gcu.business.ListingServiceInterface;
+import com.gcu.data.ListingsDataService;
 import com.gcu.model.ListingModel;
 import com.gcu.model.UserModel;
 
@@ -22,8 +23,16 @@ public class DashboardController {
 	
 	@Autowired
 	private ListingServiceInterface service;
+	
+	@Autowired
+	private ListingsDataService listingsDataService;
 
 	@GetMapping("")
+	/**
+	 * Displays dashboard
+	 * @param model model
+	 * @return dashboard view
+	 */
 	public String displayDashboard(Model model) {
 		model.addAttribute("username", userModel.credentials.getUsername());
 		model.addAttribute("totalSales", userModel.getTotalNumSales());
@@ -33,17 +42,33 @@ public class DashboardController {
 	}
 	
 	@GetMapping("/myListings")
+	/**
+	 * Display mylisting view
+	 * @param model model
+	 * @return mylisting view
+	 */
 	public String displayMyListings(Model model) {
 		model.addAttribute("listings", service.getListings());
 		return "myListings";
 	}
 	
 	@GetMapping("/listings")
+	/**
+	 * Display listing
+	 * @param model model
+	 * @return listing view
+	 */
 	public String displayListings(Model model) {
+		model.addAttribute("listings", listingsDataService.findAll());
 		return "listings";
 	}
 	
 	@GetMapping("/create")
+	/**
+	 * display create view
+	 * @param model model
+	 * @return create view
+	 */
 	public String create(Model model)
 	{
 		model.addAttribute("listingModel", new ListingModel());
@@ -51,6 +76,13 @@ public class DashboardController {
 	}
 
 	@PostMapping("/createSuccess")
+	/**
+	 * post method for create form 
+	 * @param listingModel listingModel
+	 * @param bindingResult bindingResult
+	 * @param model model
+	 * @return createSuccess view
+	 */
 	public String createSuccess(@Valid ListingModel listingModel, BindingResult bindingResult, Model model)
 	{
 		if(bindingResult.hasErrors()) {

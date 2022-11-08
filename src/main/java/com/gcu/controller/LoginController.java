@@ -23,8 +23,8 @@ public class LoginController {
 	@GetMapping("")
 	/**
 	 * This method displays the login page
-	 * @param model
-	 * @return
+	 * @param model model
+	 * @return login view
 	 */
 	public String displayLogin(Model model) {
 		model.addAttribute("userModel", new UserModel());
@@ -34,10 +34,10 @@ public class LoginController {
 	@PostMapping("")
 	/**
 	 * This method is ran when login form is sent
-	 * @param userModel
-	 * @param bindingResult
-	 * @param model
-	 * @return
+	 * @param userModel user model
+	 * @param bindingResult bindingResult
+	 * @param model model
+	 * @return dashboard view or login view
 	 */
 	public String doLogin(@Valid UserModel userModel, BindingResult bindingResult, Model model) {
 		

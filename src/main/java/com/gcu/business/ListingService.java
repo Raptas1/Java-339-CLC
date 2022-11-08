@@ -15,12 +15,18 @@ public class ListingService implements ListingServiceInterface{
     ListingsAccessInterface<ListingModel> service;
     
     @Override
+    /**
+     * Return the list of listings
+     */
     public List<ListingModel> getListings() {
      // return the list of listings
         return service.findAll();    
     }
 
     @Override
+    /**
+     * Create a listing
+     */
     public boolean createListing(ListingModel listingModel) {
         // create a listing
         service.create(listingModel);

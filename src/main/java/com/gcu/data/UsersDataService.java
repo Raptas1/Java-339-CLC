@@ -14,12 +14,19 @@ public class UsersDataService implements DataAccessInterface<UsersEntity> {
 	@Autowired
 	private UsersRepository usersRepository;
 	
+	/**
+	 * Constructor for DataService
+	 * @param usersRepository user Repository 
+	 */
 	public UsersDataService(UsersRepository usersRepository) {
 		this.usersRepository = usersRepository;
 	}
 
 	@Override
 	//unimplemented method
+	/**
+	 * Find every user
+	 */
 	public List<UsersEntity> findAll() {
 		return null;
 	}
@@ -40,12 +47,18 @@ public class UsersDataService implements DataAccessInterface<UsersEntity> {
 	}
 
 	@Override
+	/**
+	 * This method updates user to database
+	 */
 	public boolean update(UsersEntity user) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
+	/**
+	 * this method deletes from database
+	 */
 	public boolean delete(UsersEntity user) {
 		// TODO Auto-generated method stub
 		return false;

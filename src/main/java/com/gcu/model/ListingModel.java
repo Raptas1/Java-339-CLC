@@ -3,7 +3,11 @@ package com.gcu.model;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+/**
+ * Listing Model class
+ * @author ivangudino
+ *
+ */
 public class ListingModel {
 	
     private Long id;
@@ -16,6 +20,15 @@ public class ListingModel {
     @Size(min=1, max=100, message="Description has to be in range of 1 to 10 characters")
 	private String description;
 
+	/*
+	 * Categories
+	 * 1. Processor
+	 * 2. Motherboard
+	 * 3. Graphics Card
+	 * 4. RAM
+	 * 5. Storage
+	 * 6. Power Supply
+	 */
 	@Min(value=1, message="0 is not a suitable number")
 	private int category;
 
@@ -52,6 +65,10 @@ public class ListingModel {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	/**
+	 * Get the category
+	 * @return category
+	 */
 	public int getCategory() {
 		return category;
 	}

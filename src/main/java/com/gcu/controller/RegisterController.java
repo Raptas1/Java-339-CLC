@@ -30,8 +30,8 @@ public class RegisterController {
 	@GetMapping("")
 	/**
 	 * This method shows the register view
-	 * @param model
-	 * @return
+	 * @param model model
+	 * @return register view
 	 */
 	public String displayRegister(Model model) {
 		model.addAttribute("userModel", userModel);
@@ -42,10 +42,10 @@ public class RegisterController {
 	@PostMapping("")
 	/**
 	 * This method is called when register form is sent
-	 * @param userModel
-	 * @param bindingResult
-	 * @param model
-	 * @return
+	 * @param userModel user model
+	 * @param bindingResult binding result
+	 * @param model model
+	 * @return register view or dashboard view
 	 */
 	public String registered(@Valid UserModel userModel, BindingResult bindingResult, Model model) {
 		

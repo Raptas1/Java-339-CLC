@@ -19,6 +19,7 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
     
     /**
      * Non-Default constructor for constructor injection.
+     * @param dataSource dataSource
      */
     public ListingsDataService(DataSource dataSource)
     {
@@ -27,6 +28,9 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
     }
     
     @Override
+    /**
+     * Finds every listing in the database
+     */
     public List<ListingModel> findAll() {
         String sql = "SELECT * FROM LISTINGS";
         List<ListingModel> listings = new ArrayList<ListingModel>();
@@ -51,11 +55,17 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
     }
 
     @Override
+    /**
+     * find listing by ID
+     */
     public ListingModel findById(int id) {
         return null;
     }
 
     @Override
+    /**
+     * create listing and add to Database
+     */
     public boolean create(ListingModel listing) {
         String sql = "INSERT INTO LISTINGS(NAME, DESCRIPTION, CATEGORY, PRICE) VALUES(?, ?, ?, ?)";
         try
@@ -77,12 +87,18 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
     }
 
     @Override
+    /**
+     * update the listings
+     */
     public boolean update(ListingModel listing) {
         // TODO Auto-generated method stub
         return true;
     }
 
     @Override
+    /**
+     * delete the listings
+     */
     public boolean delete(ListingModel listing) {
         // TODO Auto-generated method stub
         return true;

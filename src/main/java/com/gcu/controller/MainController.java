@@ -9,7 +9,7 @@ public class MainController {
 	@GetMapping("")
 	/**
 	 * Displays main
-	 * @return
+	 * @return main view
 	 */
 	public String displayMain() {
 		return "main";
@@ -18,7 +18,7 @@ public class MainController {
 	@GetMapping("/about")
 	/**
 	 * Displays about
-	 * @return
+	 * @return about view
 	 */
 	public String displayAbout() {
 		return "about";
@@ -27,7 +27,7 @@ public class MainController {
 	@GetMapping("/listing")
 	/**
 	 * Displays public listings
-	 * @return
+	 * @return listing view
 	 */
 	public String displayPublicListings() {
 		return "publicListings";
