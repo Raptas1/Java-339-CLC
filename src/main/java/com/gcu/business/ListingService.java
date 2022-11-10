@@ -32,5 +32,21 @@ public class ListingService implements ListingServiceInterface{
         service.create(listingModel);
         return true;
     }
+
+	@Override
+	public int findProcessor(ListingModel listingModel) {
+		String processorName = listingModel.getName().toLowerCase();
+		
+		String[] arrayProcessor = processorName.split(" ");
+		
+		for(String processor : arrayProcessor) {
+			if(processor.equals("intel")) {
+				return 0;
+			} else if(processor.equals("amd")) {
+				return 1;
+			}
+		}
+		return 2;
+	}
     
 }
