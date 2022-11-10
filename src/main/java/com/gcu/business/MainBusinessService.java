@@ -17,6 +17,9 @@ public class MainBusinessService implements MainBusinessServiceInterface {
 	UserModel userModel;
 
 	@Override
+	/**
+	 * This method updates user data that comes from the database and updates the instance of a usermodel with the current user
+	 */
 	public UserModel findUser(String username) {
 		UsersEntity usersEntity = usersDataService.findByUsername(username);
 		userModel.setId(usersEntity.getId());

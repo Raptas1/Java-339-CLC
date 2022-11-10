@@ -39,7 +39,7 @@ public class DashboardController {
 	 */
 	public String displayDashboard(Model model) {
 		userModel = mainBusinessService.findUser(userModel.credentials.getUsername());
-		String welcomeMessage = String.format("Welcome Back %s", userModel.getFirstName());
+		String welcomeMessage = String.format("Welcome Back %s!", userModel.getFirstName());
 		model.addAttribute("username", welcomeMessage);
 		model.addAttribute("totalSales", userModel.getTotalNumSales());
 		model.addAttribute("totalListings", userModel.getTotalNumListings());
@@ -54,7 +54,7 @@ public class DashboardController {
 	 * @return mylisting view
 	 */
 	public String displayMyListings(Model model) {
-		model.addAttribute("listings", service.getListings());
+		model.addAttribute("listings", service.getListings(userModel.getId()));
 		return "myListings";
 	}
 	

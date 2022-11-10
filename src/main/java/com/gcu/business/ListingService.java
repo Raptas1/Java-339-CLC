@@ -18,9 +18,9 @@ public class ListingService implements ListingServiceInterface{
     /**
      * Return the list of listings
      */
-    public List<ListingModel> getListings() {
+    public List<ListingModel> getListings(Long user_Id) {
      // return the list of listings
-        return service.findAll();    
+        return service.findByUser_Id(user_Id);    
     }
 
     @Override
