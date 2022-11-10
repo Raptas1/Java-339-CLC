@@ -20,6 +20,7 @@ public class UserModel {
 	
 	//Imports
 	private ListingModel listing;
+	
 	@Valid public CredentialModel credentials;
 
 	private ArrayList<ListingModel> allListings = new ArrayList<ListingModel>();
@@ -77,6 +78,54 @@ public class UserModel {
 		this.email = email;
 	}
 	
+	
+	/**
+	 * Constructor for user model (Used in LOGIN CONTROLLER)
+	 * @param id id
+	 * @param username username
+	 * @param password password
+	 * @param firstName firstName
+	 * @param lastName lastName
+	 * @param email email
+	 * @param address address
+	 * @param city city
+	 * @param state state
+	 * @param zipcode zipcode
+	 * @param phoneNumber phoneNumber
+	 * @param totalNumListings totalNumlistings
+	 * @param totalNumSales totalNumSales
+	 * @param totalRevenue totalRevenue
+	 */
+	public UserModel(Long id,
+			String username,
+			String password,
+			String firstName, 
+			String lastName, 
+			String email, 
+			String address, 
+			String city, 
+			String state, 
+			String zipcode, 
+			String phoneNumber, 
+			int totalNumListings,
+			int totalNumSales, 
+			int totalRevenue) {
+		credentials = new CredentialModel();
+		this.id = id;
+		this.credentials.setUsername(username);
+		this.credentials.setPassword(password);
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.zipcode = zipcode;
+		this.phoneNumber = phoneNumber;
+		this.totalNumListings = totalNumListings;
+		this.totalNumSales = totalNumSales;
+		this.totalRevenue = totalRevenue;
+	}
 	/**
 	 * Get all listings
 	 * @return listings

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gcu.business.ListingServiceInterface;
+import com.gcu.business.MainBusinessService;
 import com.gcu.data.ListingsDataService;
 import com.gcu.model.ListingModel;
 import com.gcu.model.UserModel;
@@ -17,7 +18,7 @@ import com.gcu.model.UserModel;
 @Controller
 @RequestMapping("/dashboard")
 public class DashboardController {
-    
+	
 	@Autowired
 	UserModel userModel;
 	
@@ -26,6 +27,9 @@ public class DashboardController {
 	
 	@Autowired
 	private ListingsDataService listingsDataService;
+	
+	@Autowired
+	MainBusinessService mainBusinessService;
 
 	@GetMapping("")
 	/**
@@ -34,7 +38,9 @@ public class DashboardController {
 	 * @return dashboard view
 	 */
 	public String displayDashboard(Model model) {
-		model.addAttribute("username", userModel.credentials.getUsername());
+		userModel = mainBusinessService.findUser(userModel.credentials.getUsername());
+		String welcomeMessage = String.format("Welcome Back %s", userModel.getFirstName());
+		model.addAttribute("username", welcomeMessage);
 		model.addAttribute("totalSales", userModel.getTotalNumSales());
 		model.addAttribute("totalListings", userModel.getTotalNumListings());
 		model.addAttribute("totalRevenue", userModel.getTotalRevenue());
@@ -88,7 +94,7 @@ public class DashboardController {
 		if(bindingResult.hasErrors()) {
             return "create";
         }
-	    
+	    System.out.println(service.findProcessor(listingModel));
 		model.addAttribute("listings", service.createListing(listingModel));
 
 		return "createSuccess";

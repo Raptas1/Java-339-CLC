@@ -17,6 +17,7 @@ import com.gcu.model.UserModel;
 @RequestMapping("/login")
 public class LoginController {
 	
+	
 	@Autowired
 	SecurityService securityService;
 

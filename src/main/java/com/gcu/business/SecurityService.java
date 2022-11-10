@@ -12,6 +12,9 @@ public class SecurityService implements SecurityServiceInterface {
 	
 	@Autowired
 	UsersDataService usersDataService;
+	
+	@Autowired
+	UserModel userModel;
 
 	@Override
 	/**
@@ -24,13 +27,13 @@ public class SecurityService implements SecurityServiceInterface {
 		} else {
 			usersEntity = usersDataService.findByUsername(userModel.credentials.getUsername());
 			if(userModel.credentials.getPassword().equals(usersEntity.getPassword())) {
+				this.userModel.credentials.setUsername(usersEntity.getUsername());
 				return 0;
 			} else {
 				return 1;
 			}
 		}
 	}
-	
 
 
 }
