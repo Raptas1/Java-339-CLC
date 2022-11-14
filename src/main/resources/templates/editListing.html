@@ -52,28 +52,38 @@
     </div>
 	</nav>
 	
-		<form action="#" th:action="@{editSuccess/{id}(id = ${id})}" th:object="${listingModel}" method="post">
-        
-            <table>
-              <tr>
-                <td>Name:</td><td><input type="text" th:field="*{name}"></td><td><h5 style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</h5></td>
-              </tr>              
-              <tr>
-                <td>Description:</td><td><input type="text" th:field="*{description}"></td><td><h5 style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</h5></td>
-              </tr>       
-              <tr>
-                <td>Category:</td><td><input type="text" th:field="*{category}"></td><td><h5 style="color:red" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category Error</h5></td>
-              </tr>    
-              <tr>
-                <td>Price:</td><td><input type="text" th:field="*{price}"></td><td><h5 style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</h5></td>
-              </tr>    
-            </table>
-            
-              <td colspan="3"><input type="submit" value="Edit"  /></td>
-              
-            <div th:if="${#fields.hasErrors('*')}">List of Errors</div>
-            <div th:each="err : ${#fields.errors('*')}">
-             <span style="color:red" th:text="${err}" class="fieldError"></span>
-         </div>
+		
+
+         <form action="#" th:action="@{editSuccess/{id}(id = ${id})}" th:object="${listingModel}" method="post">
+          <!-- bootstrap-->
+      
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Name</label>
+            <input type="text" th:field="*{name}" class="form-control" id="exampleFormControlInput1"
+              placeholder="Example: Motherboard">
+            <h5 style="color:red" align="center" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</h5>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+            <textarea class="form-control" th:field="*{description}" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <h5 style="color:red" align="center" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+              Description</h5>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Category</label>
+            <input type="number" th:field="*{category}" class="form-control" id="exampleFormControlInput1">
+            <h5 style="color:red" align="center" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category
+              Error</h5>
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Price</label>
+            <input type="text" th:field="*{price}" class="form-control" id="exampleFormControlInput1">
+            <h5 style="color:red" align="center" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</h5>
+          </div>
+      
+          <div align="center">
+            <button type="submit" class="btn btn-primary">Create</button>
+          </div>
+        </form>
 </body>
 </html>
