@@ -63,8 +63,24 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
     /**
      * find listing by ID
      */
-    public ListingModel findById(int id) {
-        return null;
+    public ListingModel findById(Long id) {
+       String sql = String.format("SELECT * FROM LISTINGS WHERE ID = %d", id);
+       ListingModel listingModel = null;
+       try {
+    	   SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql);
+    	   if(srs.next()) {
+    		   listingModel = new ListingModel(srs.getLong("ID"),
+                       srs.getString("NAME"),
+                       srs.getString("DESCRIPTION"),
+                       srs.getInt("CATEGORY"),
+                       srs.getFloat("PRICE"),
+                       srs.getLong("USER_ID"));
+    	   }
+    	   
+       } catch (Exception e) {
+    	   e.printStackTrace();
+       }
+       return listingModel;
     }
 
     @Override
@@ -97,9 +113,21 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
     /**
      * update the listings
      */
-    public boolean update(ListingModel listing) {
-        // TODO Auto-generated method stub
-        return true;
+    public int update(ListingModel listing) {
+        String sql = "UPDATE LISTINGS SET NAME = ?, DESCRIPTION = ?, CATEGORY = ?, PRICE = ? WHERE ID = ?";
+        try {
+        	System.out.println(listing.getId());
+        	int rows = jdbcTemplateObject.update(sql, 
+                    listing.getName(),
+                    listing.getDescription(),
+                    listing.getCategory(),
+                    listing.getPrice(),
+            		listing.getId());
+            // Return result of Insert
+            return rows == 1 ? 0: 1;
+            } catch (Exception e) {
+			return 1;
+		}
     }
 
     @Override

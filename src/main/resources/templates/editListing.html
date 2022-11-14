@@ -52,23 +52,28 @@
     </div>
 	</nav>
 	
-	<h1 class="mt-4 text-center">My Listings</h1>
-	<a class="btn btn-success" th:href="@{create}">Create Listing</a>
-
-	<div class="row justify-content-left">
-		<div th:each="listing : ${listings}" class="col-md-3 d-flex align-items-stretch">
-	  		<div class="card text-center mt-5" style="width: 100%;">
-	       		<img th:src="@{/images/fav.png}" class="card-img-top img-fluid" alt="...">
-			  	<div class="card-body">
-			    	<h4 class="card-title text-success" th:text="${listing.name}">Listing</h4>
-			    	<p class="card-text text-muted" th:text="${listing.description}">Description</p>
-			    	<p class="card-text text-muted" th:text="|$${listing.price}|">Price</p>
-			    	<a th:href="@{editListing/{id} (id=${listing.id})}" class="btn btn-warning">Edit</a>
-			    	<a class="btn btn-danger">Delete</a>
-			 	</div>
-			</div>
-		</div>
-	</div>
-
+		<form action="#" th:action="@{editSuccess/{id}(id = ${id})}" th:object="${listingModel}" method="post">
+        
+            <table>
+              <tr>
+                <td>Name:</td><td><input type="text" th:field="*{name}"></td><td><h5 style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</h5></td>
+              </tr>              
+              <tr>
+                <td>Description:</td><td><input type="text" th:field="*{description}"></td><td><h5 style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</h5></td>
+              </tr>       
+              <tr>
+                <td>Category:</td><td><input type="text" th:field="*{category}"></td><td><h5 style="color:red" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category Error</h5></td>
+              </tr>    
+              <tr>
+                <td>Price:</td><td><input type="text" th:field="*{price}"></td><td><h5 style="color:red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</h5></td>
+              </tr>    
+            </table>
+            
+              <td colspan="3"><input type="submit" value="Edit"  /></td>
+              
+            <div th:if="${#fields.hasErrors('*')}">List of Errors</div>
+            <div th:each="err : ${#fields.errors('*')}">
+             <span style="color:red" th:text="${err}" class="fieldError"></span>
+         </div>
 </body>
 </html>

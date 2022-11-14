@@ -114,21 +114,19 @@
 			    <span class="visually-hidden">Next</span>
 			</button>
 		</div>
-		
-		<div th:each="listing, row: ${listings}" th:with="numList=${#strings.listSplit('2,1,0', ',')}" th:if="${row.count} % 3 == 0" class="row justify-content-center">
-    		 <div th:each="num : ${numList}" th:with="dataIndex=(${row.index} - ${num})" class="col-md-4 d-flex align-items-stretch">
-	    			<div class="card text-center mt-5" style="width: 100%;">
-		        	<img th:src="@{/images/processor.jpg}" class="card-img-top img-fluid" alt="...">
-					  	<div class="card-body">
-					    	<h5 class="card-title" th:text="${listings[dataIndex].name}">Listing</h5>
-					    	<p class="card-text" th:text="${listings[dataIndex].description}">Description</p>
-					    	<p class="card-text" th:text="${listings[dataIndex].price}">Price</p>
-					    	<button class="btn btn-success">Buy Now</button>
-					 	</div>
-					</div>
+		<div class="row justify-content-left">
+		<div th:each="listing : ${listings}" class="col-md-3 d-flex align-items-stretch">
+	  		<div class="card text-center mt-5" style="width: 100%;">
+	       		<img th:src="@{/images/fav.png}" class="card-img-top img-fluid" alt="...">
+			  	<div class="card-body">
+			    	<h4 class="card-title text-success" th:text="${listing.name}">Listing</h4>
+			    	<p class="card-text text-muted" th:text="${listing.description}">Description</p>
+			    	<p class="card-text text-muted" th:text="|$${listing.price}|">Price</p>
+			    	<button class="btn btn-success">Buy Now</button>
+			 	</div>
 			</div>
 		</div>
-		
+		</div>
 
 </body>
 </html>

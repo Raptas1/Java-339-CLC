@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -80,6 +81,28 @@ public class DashboardController {
 		model.addAttribute("listingModel", new ListingModel());
 		return "create";
 	}
+	
+	@GetMapping("/editListing/{id}")
+	/**
+	 * display edit listing view
+	 * @param model model
+	 * @return editListing view
+	 */
+	public String editListing(@PathVariable Long id, Model model) {
+		ListingModel listingModel = listingsDataService.findById(id);
+		model.addAttribute("listingModel", listingModel);
+		return "editListing";
+	}
+	
+	@PostMapping("/editListing/editSuccess/{id}")
+	public String editSuccess(@PathVariable Long id, @Valid ListingModel listingModel, BindingResult bindingResult, Model model) {
+		listingModel.setId(id);
+		if(bindingResult.hasErrors()) {
+            return "editListing";
+        }
+		listingsDataService.update(listingModel);
+		return "redirect:/dashboard/myListings";
+	}
 
 	@PostMapping("/createSuccess")
 	/**
@@ -94,7 +117,6 @@ public class DashboardController {
 		if(bindingResult.hasErrors()) {
             return "create";
         }
-	    System.out.println(service.findProcessor(listingModel));
 		model.addAttribute("listings", service.createListing(listingModel));
 
 		return "createSuccess";
