@@ -34,19 +34,16 @@ public class ListingService implements ListingServiceInterface{
     }
 
 	@Override
-	public int findProcessor(ListingModel listingModel) {
-		String processorName = listingModel.getName().toLowerCase();
-		
-		String[] arrayProcessor = processorName.split(" ");
-		
-		for(String processor : arrayProcessor) {
-			if(processor.equals("intel")) {
-				return 0;
-			} else if(processor.equals("amd")) {
-				return 1;
-			}
-		}
-		return 2;
+	public int editListing(ListingModel listingModel) {
+		service.update(listingModel);
+		return 0;
 	}
+
+	@Override
+	public int deleteListing(ListingModel listingModel) {
+		service.delete(listingModel);
+		return 0;
+	}
+	
     
 }

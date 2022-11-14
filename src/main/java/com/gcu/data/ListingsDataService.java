@@ -135,7 +135,15 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
      * delete the listings
      */
     public boolean delete(ListingModel listing) {
-        // TODO Auto-generated method stub
+        String sql = "DELETE FROM LISTINGS WHERE ID = ?";
+
+        try {
+        jdbcTemplateObject.update(sql, listing.getId());
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         return true;
     }
 

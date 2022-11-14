@@ -76,7 +76,7 @@
 					<p class="card-text text-muted" th:text="${listing.description}">Description</p>
 					<p class="card-text text-muted" th:text="|$${listing.price}|">Price</p>
 					<a th:href="@{editListing/{id} (id=${listing.id})}" class="btn btn-warning">Edit</a>
-					<a class="btn btn-danger">Delete</a>
+					<a th:href="@{deleteListing/{id} (id=${listing.id})}" class="btn btn-danger">Delete</a>
 				</div>
 			</div>
 		</div>

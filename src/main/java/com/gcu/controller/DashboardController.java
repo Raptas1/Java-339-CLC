@@ -59,6 +59,19 @@ public class DashboardController {
 		return "myListings";
 	}
 	
+	/**
+	 * displays the deleteListing view
+	 * @param id id 
+	 * @param model model
+	 * @return delete Listing view
+	 */
+	@GetMapping("/deleteListing/{id}")
+	public String deleteMyListing(@PathVariable Long id, Model model) {
+		ListingModel listingModel = listingsDataService.findById(id);
+		model.addAttribute("listingModel", listingModel);
+		return "deleteListing";
+	}
+	
 	@GetMapping("/listings")
 	/**
 	 * Display listing
@@ -82,6 +95,22 @@ public class DashboardController {
 		return "create";
 	}
 	
+	@PostMapping("/deleteListing/deleteSuccess/{id}")
+	/**
+	 * Delete Listing from database
+	 * @param id listing Id
+	 * @param listingModel listing model
+	 * @param model model
+	 * @return myListing view
+	 */
+    public String deleteSuccess(@PathVariable Long id, @Valid ListingModel listingModel,BindingResult bindingResult, Model model)
+    {
+		listingModel.setId(id);
+		System.out.println(listingModel.getId());
+        service.deleteListing(listingModel);
+        return "redirect:/dashboard/myListings";
+    }
+	
 	@GetMapping("/editListing/{id}")
 	/**
 	 * display edit listing view
@@ -100,7 +129,7 @@ public class DashboardController {
 		if(bindingResult.hasErrors()) {
             return "editListing";
         }
-		listingsDataService.update(listingModel);
+		service.editListing(listingModel);
 		return "redirect:/dashboard/myListings";
 	}
 
