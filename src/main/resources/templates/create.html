@@ -14,7 +14,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!--CSS-->
-  <link rel="stylesheet" href="myListings.css">
+  <link rel="stylesheet" href="./myListings.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 </head>
 
@@ -61,34 +61,35 @@
 
   <form action="#" th:action="@{createSuccess}" th:object="${listingModel}" method="post">
     <!-- bootstrap-->
-
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label">Name</label>
-      <input type="text" th:field="*{name}" class="form-control" id="exampleFormControlInput1"
-        placeholder="Example: Motherboard">
-      <h5 style="color:red" align="center" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</h5>
-    </div>
-    <div class="mb-3">
-      <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-      <textarea class="form-control" th:field="*{description}" id="exampleFormControlTextarea1" rows="3"></textarea>
-      <h5 style="color:red" align="center" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
-        Description</h5>
-    </div>
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label">Category</label>
-      <input type="number" th:field="*{category}" class="form-control" id="exampleFormControlInput1">
-      <h5 style="color:red" align="center" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category
-        Error</h5>
-    </div>
-    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label">Price</label>
-      <input type="text" th:field="*{price}" class="form-control" id="exampleFormControlInput1">
-      <h5 style="color:red" align="center" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</h5>
-    </div>
-
-    <div align="center">
-      <button type="submit" class="btn btn-primary">Create</button>
-    </div>
+	  <div class="col text-center w-50 mt-5 mx-auto">
+	   <div class="mb-3">
+	     <label for="exampleFormControlInput1" class="form-label">Name</label>
+	     <input type="text" th:field="*{name}" class="form-control" id="exampleFormControlInput1"
+	       placeholder="Example: Motherboard">
+	     <h5 style="color:red" align="center" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</h5>
+	   </div>
+	   <div class="mb-3">
+	     <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+	     <textarea class="form-control" th:field="*{description}" id="exampleFormControlTextarea1" rows="3"></textarea>
+	     <h5 style="color:red" align="center" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+	       Description</h5>
+	   </div>
+	   <div class="mb-3">
+	     <label for="exampleFormControlInput1" class="form-label">Category</label>
+	     <input type="number" th:field="*{category}" class="form-control" id="exampleFormControlInput1">
+	     <h5 style="color:red" align="center" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category
+	       Error</h5>
+	   </div>
+	   <div class="mb-3">
+	     <label for="exampleFormControlInput1" class="form-label">Price</label>
+	     <input type="text" th:field="*{price}" class="form-control" id="exampleFormControlInput1">
+	     <h5 style="color:red" align="center" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</h5>
+	   </div>
+	
+	   <div class="d-grid col-4 mx-auto" align="center">
+	     <button type="submit" class="btn btn-success">Create</button>
+	   </div>
+	  </div>
   </form>
 </body>
 
