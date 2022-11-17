@@ -116,7 +116,6 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
     public int update(ListingModel listing) {
         String sql = "UPDATE LISTINGS SET NAME = ?, DESCRIPTION = ?, CATEGORY = ?, PRICE = ? WHERE ID = ?";
         try {
-        	System.out.println(listing.getId());
         	int rows = jdbcTemplateObject.update(sql, 
                     listing.getName(),
                     listing.getDescription(),

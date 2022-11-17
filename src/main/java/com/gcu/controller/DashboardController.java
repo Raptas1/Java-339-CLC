@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -61,13 +60,13 @@ public class DashboardController {
 	
 	/**
 	 * displays the deleteListing view
-	 * @param id id 
+	 * @param listingModel listingModel 
 	 * @param model model
 	 * @return delete Listing view
 	 */
-	@GetMapping("/deleteListing/{id}")
-	public String deleteMyListing(@PathVariable Long id, Model model) {
-		ListingModel listingModel = listingsDataService.findById(id);
+	@PostMapping("/deleteListing")
+	public String deleteMyListing(ListingModel listingModel, Model model) {
+		listingModel = listingsDataService.findById(listingModel.getId());
 		model.addAttribute("listingModel", listingModel);
 		return "deleteListing";
 	}
@@ -95,7 +94,7 @@ public class DashboardController {
 		return "create";
 	}
 	
-	@PostMapping("/deleteListing/deleteSuccess/{id}")
+	@PostMapping("deleteSuccess")
 	/**
 	 * Delete Listing from database
 	 * @param id listing Id
@@ -103,29 +102,33 @@ public class DashboardController {
 	 * @param model model
 	 * @return myListing view
 	 */
-    public String deleteSuccess(@PathVariable Long id, @Valid ListingModel listingModel,BindingResult bindingResult, Model model)
+    public String deleteSuccess(@Valid ListingModel listingModel,BindingResult bindingResult, Model model)
     {
-		listingModel.setId(id);
-		System.out.println(listingModel.getId());
         service.deleteListing(listingModel);
         return "redirect:/dashboard/myListings";
     }
 	
-	@GetMapping("/editListing/{id}")
+	@PostMapping("/editListing")
 	/**
 	 * display edit listing view
 	 * @param model model
 	 * @return editListing view
 	 */
-	public String editListing(@PathVariable Long id, Model model) {
-		ListingModel listingModel = listingsDataService.findById(id);
+	public String editListing(ListingModel listingModel, Model model) {
+		listingModel = listingsDataService.findById(listingModel.getId());
 		model.addAttribute("listingModel", listingModel);
 		return "editListing";
 	}
 	
-	@PostMapping("/editListing/editSuccess/{id}")
-	public String editSuccess(@PathVariable Long id, @Valid ListingModel listingModel, BindingResult bindingResult, Model model) {
-		listingModel.setId(id);
+	@PostMapping("/editSuccess")
+	/**
+	 * This method is ran when edit is successful
+	 * @param listingModel listingModel
+	 * @param bindingResult bindingResult
+	 * @param model model
+	 * @return editListing view if errors or myListings if no errors
+	 */
+	public String editSuccess(@Valid ListingModel listingModel, BindingResult bindingResult, Model model) {
 		if(bindingResult.hasErrors()) {
             return "editListing";
         }

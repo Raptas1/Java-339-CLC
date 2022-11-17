@@ -14,11 +14,23 @@
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 	<!--CSS-->
-	<link rel="stylesheet" href="myListings.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+	<style>
+	@font-face {
+	  font-family: 'Mona Sans';
+	  src:
+	    url('Mona-Sans.woff2') format('woff2 supports variations'),
+	    url('Mona-Sans.woff2') format('woff2-variations');
+	  font-weight: 200 900;
+	  font-stretch: 75% 125%;
+	}
+	
+	html {
+	  font-family: 'Mona Sans';
+	}
+	</style>
 </head>
 
-<body style="font-family: Montserrat, sans-serif">
+<body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 			<a href="#" class="navbar-brand">
@@ -75,8 +87,14 @@
 					<h4 class="card-title text-success" th:text="${listing.name}">Listing</h4>
 					<p class="card-text text-muted" th:text="${listing.description}">Description</p>
 					<p class="card-text text-muted" th:text="|$${listing.price}|">Price</p>
-					<a th:href="@{editListing/{id} (id=${listing.id})}" class="btn btn-warning">Edit</a>
-					<a th:href="@{deleteListing/{id} (id=${listing.id})}" class="btn btn-danger">Delete</a>
+					<form action="#" th:action="@{editListing}" th:object="${listing}" method="post">
+						<input type="hidden" class="form-control disabled" th:value="*{id}" name="id">
+						<button type="submit" class="btn btn-warning form-control">Edit</button>
+					</form>
+					<form action="#" th:action="@{deleteListing}" th:object="${listing}" method="post">
+						<input type="hidden" class="form-control disabled" th:value="*{id}" name="id">
+						<button type="submit" class="btn btn-danger form-control">Delete</button>
+					</form>
 				</div>
 			</div>
 		</div>
