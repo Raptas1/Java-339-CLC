@@ -64,25 +64,33 @@
 	  <div class="col text-center w-50 mt-5 mx-auto">
 	   <div class="mb-3">
 	     <label for="exampleFormControlInput1" class="form-label">Name</label>
-	     <input type="text" th:field="*{name}" class="form-control" id="exampleFormControlInput1"
+	     <input type="text" th:field="*{name}" th:errorclass="border-danger" class="form-control" id="exampleFormControlInput1"
 	       placeholder="Example: Motherboard">
 	     <h5 style="color:red" align="center" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</h5>
 	   </div>
 	   <div class="mb-3">
 	     <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-	     <textarea class="form-control" th:field="*{description}" id="exampleFormControlTextarea1" rows="3"></textarea>
+	     <textarea class="form-control" th:field="*{description}" th:errorclass="border-danger" id="exampleFormControlTextarea1" rows="3"></textarea>
 	     <h5 style="color:red" align="center" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
 	       Description</h5>
 	   </div>
 	   <div class="mb-3">
 	     <label for="exampleFormControlInput1" class="form-label">Category</label>
-	     <input type="number" th:field="*{category}" class="form-control" id="exampleFormControlInput1">
-	     <h5 style="color:red" align="center" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category
+	     <select class="form-select" name="category" th:errorclass="border-danger" th:field="*{category}">
+	     	<option disabled value=0></option>
+	     	<option value=1>Processor</option>
+			<option value=2>Motherboard</option>
+			<option value=3>Graphics Card</option>
+			<option value=4>Ram</option>
+			<option value=5>Storage</option>
+			<option value=6>Power Supply</option>
+	     </select>
+	     <h5 style="color:red" align="center" th:if="${#fields.hasErrors('category')}" th:errorclass="border-danger" th:errors="*{category}">Category
 	       Error</h5>
 	   </div>
 	   <div class="mb-3">
 	     <label for="exampleFormControlInput1" class="form-label">Price</label>
-	     <input type="text" th:field="*{price}" class="form-control" id="exampleFormControlInput1">
+	     <input type="text" th:field="*{price}" class="form-control" th:errorclass="border-danger" id="exampleFormControlInput1">
 	     <h5 style="color:red" align="center" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</h5>
 	   </div>
 	

@@ -29,7 +29,7 @@ public class ListingModel {
 	 * 5. Storage
 	 * 6. Power Supply
 	 */
-	@Min(value=1, message="0 is not a suitable number")
+	@Min(value=1, message="Category cannot be empty")
 	private int category;
 
 	@Min(value=1, message="0 is not a suitable number")

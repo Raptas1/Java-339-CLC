@@ -10,23 +10,10 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!--CSS-->
-<style>
-@font-face {
-  font-family: 'Mona Sans';
-  src:
-    url('Mona-Sans.woff2') format('woff2 supports variations'),
-    url('Mona-Sans.woff2') format('woff2-variations');
-  font-weight: 200 900;
-  font-stretch: 75% 125%;
-}
-
-html {
-  font-family: 'Mona Sans';
-}
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 </head>
 
-<body>
+<body style="font-family: Montserrat, sans-serif">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a href="#" class="navbar-brand">
@@ -82,12 +69,20 @@ html {
 	            <h5 style="color:red" align="center" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
 	              Description</h5>
 	          </div>
-	          <div class="mb-3">
-	            <label for="exampleFormControlInput1" class="form-label">Category</label>
-	            <input type="number" th:field="*{category}" class="form-control" id="exampleFormControlInput1">
-	            <h5 style="color:red" align="center" th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Category
-	              Error</h5>
-	          </div>
+			   <div class="mb-3">
+			     <label for="exampleFormControlInput1" class="form-label">Category</label>
+			     <select class="form-select" name="category" th:errorclass="border-danger" th:field="*{category}">
+			     	<option disabled value=0></option>
+			     	<option value=1>Processor</option>
+					<option value=2>Motherboard</option>
+					<option value=3>Graphics Card</option>
+					<option value=4>Ram</option>
+					<option value=5>Storage</option>
+					<option value=6>Power Supply</option>
+			     </select>
+			     <h5 style="color:red" align="center" th:if="${#fields.hasErrors('category')}" th:errorclass="border-danger" th:errors="*{category}">Category
+			       Error</h5>
+			   </div>
 	          <div class="mb-3">
 	            <label for="exampleFormControlInput1" class="form-label">Price</label>
 	            <input type="text" th:field="*{price}" class="form-control" id="exampleFormControlInput1">
@@ -96,7 +91,7 @@ html {
 	      
 	          <div align="center">
 	            <button type="submit" class="btn btn-success">Edit</button>
-	            <a th:href="@{../myListings}" class="btn btn-danger">Cancel</a>
+	            <a th:href="@{./myListings}" class="btn btn-danger">Cancel</a>
 	          </div>
           </div>
         </form>
