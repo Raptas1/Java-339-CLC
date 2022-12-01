@@ -35,15 +35,21 @@ public class ListingModel {
 	@Min(value=1, message="0 is not a suitable number")
 	private float price;
 	
+	//0 Active
+	//1 SOLD
+	private int status;
+	
 	private Long user_id;
 	
-	public ListingModel(Long id, String name, String description, int category, float price, Long user_id)
+	
+	public ListingModel(Long id, String name, String description, int category, float price, int status, Long user_id)
 	{
 	    this.id = id;
 		this.name = name;
 		this.description = description;
 		this.category = category;
 		this.price = price;
+		this.status = status;
 		this.user_id = user_id;
 	}
 	public ListingModel()
@@ -83,6 +89,13 @@ public class ListingModel {
 	}
 	public void setPrice(float price) {
 		this.price = price;
+	}
+	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	public Long getUser_id() {
 		return user_id;

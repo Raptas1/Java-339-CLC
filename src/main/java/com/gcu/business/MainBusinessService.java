@@ -1,11 +1,14 @@
 package com.gcu.business;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gcu.data.ListingsDataService;
 import com.gcu.data.UsersDataService;
 import com.gcu.data.entity.UsersEntity;
+import com.gcu.model.ListingModel;
 import com.gcu.model.UserModel;
 
 @Service
@@ -25,32 +28,42 @@ public class MainBusinessService implements MainBusinessServiceInterface {
 	 * This method updates user data that comes from the database and updates the instance of a usermodel with the current user
 	 */
 	public UserModel findUser(String username) {
-		
-		UsersEntity usersEntity = usersDataService.findByUsername(username);
-		userModel.setId(usersEntity.getId());
-		userModel.credentials.setUsername(usersEntity.getUsername());
-		userModel.credentials.setPassword(usersEntity.getPassword());
-		userModel.setFirstName(usersEntity.getFirstName());
-		userModel.setLastName(usersEntity.getLastName());
-		userModel.setEmail(usersEntity.getEmail());
-		userModel.setAddress(usersEntity.getAddress());
-		userModel.setCity(usersEntity.getCity());
-		userModel.setState(usersEntity.getState());
-		userModel.setZipcode(usersEntity.getZipcode());
-		userModel.setPhoneNumber(usersEntity.getPhoneNumber());
+			UsersEntity usersEntity = usersDataService.findByUsername(username);
+			userModel.setId(usersEntity.getId());
+			userModel.credentials.setUsername(usersEntity.getUsername());
+			userModel.credentials.setPassword(usersEntity.getPassword());
+			userModel.setFirstName(usersEntity.getFirstName());
+			userModel.setLastName(usersEntity.getLastName());
+			userModel.setEmail(usersEntity.getEmail());
+			userModel.setAddress(usersEntity.getAddress());
+			userModel.setCity(usersEntity.getCity());
+			userModel.setState(usersEntity.getState());
+			userModel.setZipcode(usersEntity.getZipcode());
+			userModel.setPhoneNumber(usersEntity.getPhoneNumber());
 
-		updateListings();
-		userModel.setTotalNumSales(usersEntity.getTotalNumSales());
-		userModel.setTotalRevenue(usersEntity.getTotalRevenue());
-		
-		return userModel;
+			updateListings();
+			
+			return userModel;
 	}
 	/**
 	 * This method find all listings created by the user and updated the listing count.
 	 */
 	public int updateListings() {
-		int listingsSize = listingsDataService.findByUser_Id(userModel.getId()).size();
-		userModel.setTotalNumListings(listingsSize);
+		int soldListings = 0;
+		int soldRevenue = 0;
+		
+		List<ListingModel> listings = listingsDataService.findByUser_Id(userModel.getId());
+		userModel.setTotalNumListings(listings.size());
+		
+		for (ListingModel listing : listings) {
+			if(listing.getStatus() == 1) {
+				soldListings++;
+				soldRevenue = (int) (soldRevenue + listing.getPrice());
+			}
+		}
+		userModel.setTotalNumSales(soldListings);
+		userModel.setTotalRevenue(soldRevenue);
+		
 		return 0;
 	}
 

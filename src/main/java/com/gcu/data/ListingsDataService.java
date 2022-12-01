@@ -36,7 +36,7 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
      * Finds every listing in the database
      */
     public List<ListingModel> findAll() {
-        String sql = "SELECT * FROM LISTINGS";
+        String sql = "SELECT * FROM LISTINGS WHERE STATUS = 0";
         List<ListingModel> listings = new ArrayList<ListingModel>();
         try
         {
@@ -49,6 +49,7 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
                         srs.getString("DESCRIPTION"),
                         srs.getInt("CATEGORY"),
                         srs.getFloat("PRICE"),
+                        srs.getInt("STATUS"),
                         srs.getLong("USER_ID")));
             }
         }
@@ -74,6 +75,7 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
                        srs.getString("DESCRIPTION"),
                        srs.getInt("CATEGORY"),
                        srs.getFloat("PRICE"),
+                       srs.getInt("STATUS"),
                        srs.getLong("USER_ID"));
     	   }
     	   
@@ -88,7 +90,7 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
      * create listing and add to Database
      */
     public boolean create(ListingModel listing) {
-        String sql = "INSERT INTO LISTINGS(NAME, DESCRIPTION, CATEGORY, PRICE, USER_ID) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO LISTINGS(NAME, DESCRIPTION, CATEGORY, PRICE, STATUS, USER_ID) VALUES(?, ?, ?, ?, ?, ?)";
         try
         {
         	listing.setUser_id(userModel.getId());
@@ -98,6 +100,7 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
                     listing.getDescription(),
                     listing.getCategory(),
                     listing.getPrice(),
+                    listing.getStatus(),
             		listing.getUser_id());
             // Return result of Insert
             return rows == 1 ? true: false;
@@ -121,6 +124,7 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
                     listing.getDescription(),
                     listing.getCategory(),
                     listing.getPrice(),
+                    listing.getStatus(),
             		listing.getId());
             // Return result of Insert
             return rows == 1 ? 0: 1;
@@ -164,6 +168,7 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
 	                        srs.getString("DESCRIPTION"),
 	                        srs.getInt("CATEGORY"),
 	                        srs.getFloat("PRICE"),
+	                        srs.getInt("STATUS"),
 	                        srs.getLong("USER_ID")));
 	            }
 	        }
@@ -173,6 +178,48 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
 	        }
 	        return listings;
 	}
+	
+	@Override
+	/**
+	 * Find the active listings by UserID
+	 */
+	public List<ListingModel> findActiveByUser_Id(Long id) {
+		String sql = String.format("SELECT * FROM LISTINGS WHERE USER_ID = %d AND STATUS = 0", userModel.getId());
+		 List<ListingModel> listings = new ArrayList<ListingModel>();
+	        try
+	        {
+	            // Execute SQL Query and loop over result set
+	            SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql);
+	            while(srs.next())
+	            {
+	                listings.add(new ListingModel(srs.getLong("ID"),
+	                        srs.getString("NAME"),
+	                        srs.getString("DESCRIPTION"),
+	                        srs.getInt("CATEGORY"),
+	                        srs.getFloat("PRICE"),
+	                        srs.getInt("STATUS"),
+	                        srs.getLong("USER_ID")));
+	            }
+	        }
+	        catch (Exception e)
+	        {
+	            e.printStackTrace();
+	        }
+	        return listings;
+	}
+
+	@Override
+	public int updateStatus(ListingModel listingModel) {
+		String sql = "UPDATE LISTINGS SET STATUS = ? WHERE ID = ?";
+        try {
+        	int rows = jdbcTemplateObject.update(sql, 1, listingModel.getId());
+            // Return result of Insert
+            return rows == 1 ? 0: 1;
+            } catch (Exception e) {
+			return 1;
+		}
+	}
+
 
    
 

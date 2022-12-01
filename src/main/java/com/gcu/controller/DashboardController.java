@@ -54,7 +54,7 @@ public class DashboardController {
 	 * @return mylisting view
 	 */
 	public String displayMyListings(Model model) {
-		model.addAttribute("listings", service.getListings(userModel.getId()));
+		model.addAttribute("listings", service.getActiveListings(userModel.getId()));
 		return "myListings";
 	}
 	
@@ -79,6 +79,7 @@ public class DashboardController {
 	 */
 	public String displayListings(Model model) {
 		model.addAttribute("listings", listingsDataService.findAll());
+		model.addAttribute("user", userModel);
 		return "listings";
 	}
 	
@@ -152,5 +153,13 @@ public class DashboardController {
 		model.addAttribute("listings", service.createListing(listingModel));
 
 		return "createSuccess";
+	}
+	
+	@PostMapping("/listings")
+	public String buy(ListingModel listingModel) {
+		listingModel = listingsDataService.findById(listingModel.getId());
+		service.buyListing(listingModel);
+		return "redirect:/dashboard/listings";
+		
 	}
 }

@@ -114,18 +114,23 @@
 			    <span class="visually-hidden">Next</span>
 			</button>
 		</div>
+		
 		<div class="row justify-content-left">
-		<div th:each="listing : ${listings}" class="col-md-3 d-flex align-items-stretch">
-	  		<div class="card shadow text-center mt-5" style="width: 100%;">
-	       		<img th:src="@{/images/fav.png}" class="card-img-top img-fluid" alt="...">
-			  	<div class="card-body">
-			    	<h4 class="card-title text-success" th:text="${listing.name}">Listing</h4>
-			    	<p class="card-text text-muted" th:text="${listing.description}">Description</p>
-			    	<p class="card-text text-muted" th:text="|$${listing.price}|">Price</p>
-			    	<button class="btn btn-success">Buy Now</button>
-			 	</div>
+			<div th:each="listing : ${listings}" class="col-md-3 d-flex align-items-stretch">
+		  		<div class="card shadow text-center mt-5" style="width: 100%;">
+		       		<img th:src="@{/images/fav.png}" class="card-img-top img-fluid" alt="...">
+				  	<div class="card-body">
+				    	<h4 class="card-title text-success" th:text="${listing.name}">Listing</h4>
+				    	<p class="card-text text-muted" th:text="${listing.description}">Description</p>
+				    	<p class="card-text text-muted" th:text="|$${listing.price}|">Price</p>
+    					<form action="#" th:action="@{listings}" th:object="${listing}" method="post">
+    					    <input type="hidden" class="form-control disabled" th:value="*{id}" name="id">
+    						<button class='btn' th:classappend="${listing.user_id == user.id ? 'disabled' : 'btn-success'}" type="submit">Buy Now
+    						</button>
+    					</form>
+				 	</div>
+				</div>
 			</div>
-		</div>
 		</div>
 
 </body>
