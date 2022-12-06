@@ -26,7 +26,8 @@ public class GlobalException
 		// Create a Model and View, populate with the Exception information, and display a common Error Page
 		ModelAndView model = new ModelAndView();
 		model.addObject("title", "Error Page");
-		model.addObject("error", "Error: An Exception was not handled in the application: " + ex.getMessage());
+		model.addObject("error", "Error: An Exception was not handled in the application: "  + ex.getMessage());
+		//ex.printStackTrace();
 		model.setViewName("exception");
 		return model;
 	}

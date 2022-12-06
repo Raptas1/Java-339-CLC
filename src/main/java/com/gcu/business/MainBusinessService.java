@@ -27,8 +27,9 @@ public class MainBusinessService implements MainBusinessServiceInterface {
 	/**
 	 * This method updates user data that comes from the database and updates the instance of a usermodel with the current user
 	 */
-	public UserModel findUser(String username) {
-			UsersEntity usersEntity = usersDataService.findByUsername(username);
+	public UserModel createUserSession(String username) {
+		UsersEntity usersEntity = usersDataService.findByUsername(username);
+		// update the usermodel from database data
 			userModel.setId(usersEntity.getId());
 			userModel.credentials.setUsername(usersEntity.getUsername());
 			userModel.credentials.setPassword(usersEntity.getPassword());
@@ -49,6 +50,7 @@ public class MainBusinessService implements MainBusinessServiceInterface {
 	 * This method find all listings created by the user and updated the listing count.
 	 */
 	public int updateListings() {
+		//populate the listing with database data
 		int soldListings = 0;
 		int soldRevenue = 0;
 		

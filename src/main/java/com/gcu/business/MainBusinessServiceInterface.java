@@ -4,7 +4,7 @@ import com.gcu.model.UserModel;
 
 public interface MainBusinessServiceInterface {
 	
-	public UserModel findUser(String username);
+	public UserModel createUserSession(String username);
 	public int updateListings();
 
 }

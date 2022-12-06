@@ -38,7 +38,10 @@ public class DashboardController {
 	 * @return dashboard view
 	 */
 	public String displayDashboard(Model model) {
-		userModel = mainBusinessService.findUser(userModel.credentials.getUsername());
+		if(userModel.credentials.getUsername() == null) {
+			return "redirect:/login";
+		}
+		mainBusinessService.createUserSession(userModel.credentials.getUsername());
 		String welcomeMessage = String.format("Welcome Back %s!", userModel.getFirstName());
 		model.addAttribute("username", welcomeMessage);
 		model.addAttribute("totalSales", userModel.getTotalNumSales());

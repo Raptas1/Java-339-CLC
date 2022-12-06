@@ -66,8 +66,6 @@ public class RegisterController {
 		
 		usersBusinessService.createUser(userModel);
 		
-		
-		System.out.println("Username: " + userModel.credentials.getUsername() + " Password: " + userModel.credentials.getPassword());
 		this.userModel.setFirstName(userModel.getFirstName());
 		this.userModel.setLastName(userModel.getLastName());
 		this.userModel.credentials.setUsername(userModel.credentials.getUsername());

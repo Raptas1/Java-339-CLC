@@ -46,10 +46,6 @@ public class LoginController {
 			return "/login";
 		}
 		
-		if(securityService.authenticateUser(userModel) == 0) {
-			return ("redirect:/dashboard");
-		}
-		
 		bindingResult.rejectValue("credentials.username", "error.user", "Incorrect username or password");
 		return ("/login");
 	}

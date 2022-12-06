@@ -10,6 +10,11 @@ import com.gcu.model.ListingModel;
 import com.gcu.model.UserModel;
 
 @Service
+/**
+ * This class has Listing Service methods
+ * @author ivangudino me
+ *
+ */
 public class ListingService implements ListingServiceInterface{
 	
 	
@@ -49,19 +54,31 @@ public class ListingService implements ListingServiceInterface{
     }
 
 	@Override
+	/**
+	 * This method edits the listings
+	 */
 	public int editListing(ListingModel listingModel) {
+		//edit listing
 		service.update(listingModel);
 		return 0;
 	}
 
 	@Override
+	/**
+	 * This method deletes the listing
+	 */
 	public int deleteListing(ListingModel listingModel) {
+		//delete listing
 		service.delete(listingModel);
 		return 0;
 	}
 
 	@Override
+	/**
+	 * This method buys the listing
+	 */
 	public int buyListing(ListingModel listingModel) {
+		//buy listing
 		service.updateStatus(listingModel);
 		return 0;
 	}
