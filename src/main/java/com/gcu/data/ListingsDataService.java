@@ -33,6 +33,35 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
     
     @Override
     /**
+     * Finds every listing in the database without filter
+     */
+    public List<ListingModel> findAllNF() {
+        String sql = "SELECT * FROM LISTINGS";
+        List<ListingModel> listings = new ArrayList<ListingModel>();
+        try
+        {
+            // Execute SQL Query and loop over result set
+            SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql);
+            while(srs.next())
+            {
+                listings.add(new ListingModel(srs.getLong("ID"),
+                        srs.getString("NAME"),
+                        srs.getString("DESCRIPTION"),
+                        srs.getInt("CATEGORY"),
+                        srs.getFloat("PRICE"),
+                        srs.getInt("STATUS"),
+                        srs.getLong("USER_ID")));
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return listings;
+    }
+    
+    @Override
+    /**
      * Finds every listing in the database
      */
     public List<ListingModel> findAll() {
@@ -65,6 +94,31 @@ public class ListingsDataService implements ListingsAccessInterface<ListingModel
      * find listing by ID
      */
     public ListingModel findById(Long id) {
+       String sql = String.format("SELECT * FROM LISTINGS WHERE ID = %d", id);
+       ListingModel listingModel = null;
+       try {
+    	   SqlRowSet srs = jdbcTemplateObject.queryForRowSet(sql);
+    	   if(srs.next()) {
+    		   listingModel = new ListingModel(srs.getLong("ID"),
+                       srs.getString("NAME"),
+                       srs.getString("DESCRIPTION"),
+                       srs.getInt("CATEGORY"),
+                       srs.getFloat("PRICE"),
+                       srs.getInt("STATUS"),
+                       srs.getLong("USER_ID"));
+    	   }
+    	   
+       } catch (Exception e) {
+    	   e.printStackTrace();
+       }
+       return listingModel;
+    }
+    
+    @Override
+    /**
+     * find listing by ID
+     */
+    public ListingModel findById(int id) {
        String sql = String.format("SELECT * FROM LISTINGS WHERE ID = %d", id);
        ListingModel listingModel = null;
        try {
