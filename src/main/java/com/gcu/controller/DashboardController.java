@@ -159,6 +159,11 @@ public class DashboardController {
 	}
 	
 	@PostMapping("/listings")
+	/**
+	 * Buy a listing
+	 * @param listingModel listingModel
+	 * @return listings view
+	 */
 	public String buy(ListingModel listingModel) {
 		listingModel = listingsDataService.findById(listingModel.getId());
 		service.buyListing(listingModel);

@@ -8,8 +8,11 @@ import org.springframework.stereotype.Component;
 /**
  * Credential Model class
  * @author ivangudino
+ * Credentials
  */
 public class CredentialModel {
+	
+	//username and password
 	
 	@Size(min=1, max=32, message="Username must be between 1-32 characters")
 	private String username;

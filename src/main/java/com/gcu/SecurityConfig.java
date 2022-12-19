@@ -13,23 +13,37 @@ import com.gcu.business.SecurityService;
 @SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
+/**
+ * Security Configurations
+ * @author ivangudino
+ *
+ */
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
 	
 	@Autowired
+	//security service
 	SecurityService service;
 	
 	
 	@Override
+	/**
+	 * This method configures the security settings
+	 */
 	protected void configure(HttpSecurity http) throws Exception
 	{
 		http.csrf().disable()
+			.httpBasic()
+				.and()
+				.authorizeRequests()
+				.antMatchers("/api/**").authenticated()
+				.and()
 		    .authorizeRequests()
 		        .antMatchers("/", "/about", "/listing", "/register").permitAll()
 		        .antMatchers("/images/**", "/css/*", "/js/**").permitAll()
 		        .anyRequest().authenticated()
 		        .and()
-		    .formLogin()
+		        .formLogin()
 		        .loginPage("/login")
 		        .usernameParameter("credentials.username")
 		        .passwordParameter("credentials.password")
@@ -45,6 +59,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 	}
 	
 	@Autowired
+	/**
+	 * This method encrypts the passwords.
+	 */
 	public void configure(AuthenticationManagerBuilder auth) throws Exception
 	{
 		auth
